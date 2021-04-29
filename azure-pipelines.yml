@@ -37,7 +37,7 @@ stages:
       displayName: AKS Deploy on Development
       dependsOn: Java_App_Build
       jobs:
-        - deployment: Deploy on Deployment
+        - deployment: Deploy_Dev
           displayName: Deploy on Development
           pool:
             vmImage: ubuntu-lastest
