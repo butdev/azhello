@@ -13,7 +13,7 @@ resources :
 name: v$(Date:yyyyMMdd)$(Rev:.r)
 
 variables:
-    REGISTRY_CONNECTION_NAME: jbtestacr
+    REGISTRY_CONNECTION_NAME: myacr
     IMAGE_NAME: apps/hello
     registry_uri: jbtestacr.azurecr.io
     application_name: hello
