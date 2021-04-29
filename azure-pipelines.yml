@@ -15,9 +15,10 @@ name: v$(Date:yyyyMMdd)$(Rev:.r)
 variables:
     REGISTRY_CONNECTION_NAME: myacr
     IMAGE_NAME: apps/hello
-    registry_uri: jbtestacr.azurecr.io
-    application_name: hello
+    REGISTRY_URL: jbtestacr.azurecr.io
+    APPLICATION_NAME: hello
     ENVIRONMENT_NAME: Dev
+    VMIMAGE_NAME: $(VMIMAGE_NAME)
 
 stages:
     - stage: Java_App_Build
@@ -40,7 +41,7 @@ stages:
         - deployment: Deploy_Dev
           displayName: Deploy on Development
           pool:
-            vmImage: ubuntu-lastest
+            vmImage: $(VMIMAGE_NAME)
           environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
           variables:
             KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
