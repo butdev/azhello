@@ -6,9 +6,9 @@ resources :
     - repository: pipelines
       type: git
       name: pipelines-template
-#     - repository: manifests
-#       type: git
-#       name: kustomize-template
+    - repository: manifests
+      type: git
+      name: kustomize-template
 
 name: v$(Date:yyyyMMdd)$(Rev:.r)
 
@@ -17,6 +17,7 @@ variables:
     IMAGE_NAME: apps/hello
     registry_uri: jbtestacr.azurecr.io
     application_name: hello
+    ENVIRONMENT_NAME: Dev
 
 stages:
     - stage: Java_App_Build
@@ -32,3 +33,19 @@ stages:
             JDK_VERSION: '11'
           steps:
             - template: build.yaml@pipelines
+    - stage: AKS_Deploy_Dev
+      displayName: AKS Deploy on Development
+      dependsOn: Java_App_Build
+      jobs:
+        - deployment: Deploy on Deployment
+          displayName: Deploy on Development
+          pool:
+            vmImage: ubuntu-lastest
+          environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
+          variables:
+            KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - template: deploy.yaml@pipelines
