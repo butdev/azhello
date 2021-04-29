@@ -1,0 +1,34 @@
+trigger:
+    - master
+
+  resources :
+      repositories:
+      - repository: pipelines
+        type: git
+        name: pipelines-template
+#     - repository: manifests
+#       type: git
+#       name: kustomize-template
+
+name: v$(Date:yyyyMMdd)$(Rev:.r)
+
+variables:
+    REGISTRY_CONNECTION_NAME: jbtestacr
+    IMAGE_NAME: apps/hello
+    registry_uri: jbtestacr.azurecr.io
+    application_name: hello
+
+stages:
+    - stage: Java_App_Build
+      displayName: Java application Build
+      jobs:
+        - job: build
+          displayName: Maven build, docker build and tagging on git
+          pool:
+            vmImage: ubuntu-latest
+        variables:
+            MAVEN_CACHE_FOLDER: $(System.DefaultWorkingDirectory)/.m2/repository
+            MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+            JDK_VERSION: '11'
+        steps:
+          - template: build.yaml@pipelines
