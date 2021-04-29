@@ -27,8 +27,8 @@ stages:
           pool:
             vmImage: ubuntu-latest
         variables:
-            MAVEN_CACHE_FOLDER: $(System.DefaultWorkingDirectory)/.m2/repository
-            MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
-            JDK_VERSION: '11'
+          MAVEN_CACHE_FOLDER: $(System.DefaultWorkingDirectory)/.m2/repository
+          MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+          JDK_VERSION: '11'
         steps:
           - template: build.yaml@pipelines
