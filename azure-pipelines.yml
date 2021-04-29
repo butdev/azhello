@@ -1,11 +1,11 @@
 trigger:
     - master
 
-  resources :
-      repositories:
-      - repository: pipelines
-        type: git
-        name: pipelines-template
+resources :
+    repositories:
+    - repository: pipelines
+    type: git
+    name: pipelines-template
 #     - repository: manifests
 #       type: git
 #       name: kustomize-template
