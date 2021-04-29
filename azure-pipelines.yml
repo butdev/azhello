@@ -4,8 +4,8 @@ trigger:
 resources :
     repositories:
     - repository: pipelines
-    type: git
-    name: pipelines-template
+      type: git
+      name: pipelines-template
 #     - repository: manifests
 #       type: git
 #       name: kustomize-template
