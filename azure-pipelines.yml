@@ -35,10 +35,23 @@ stages:
             JDK_VERSION: '11'
           steps:
             - template: build.yaml@pipelines
+
     - stage: AKS_Deploy_Dev
       displayName: AKS Deploy on Development
       dependsOn: Java_App_Build
       jobs:
+        - job: 
+          steps:
+          - task: KubernetesManifest@0
+            displayName: Create secret
+            inputs:
+              action: createSecret
+              secretType: dockerregistry #dockerRegistry or generic
+              secretName: jbAcrSecret
+              dockerRegistryEndpoint: myacr #Service connection name?
+              kubernetesServiceConnection: Dev-jbtest-aks-hello-1619683637064 #kubernetes Service connection Name
+              namespace: hello
+
         - deployment: Deploy_Dev
           displayName: Deploy on Development
           pool:
