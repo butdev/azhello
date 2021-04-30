@@ -47,20 +47,28 @@ stages:
             inputs:
               action: createSecret
               secretType: dockerregistry #dockerRegistry or generic
-              secretName: jbAcrSecret
+              secretName: myacrsecret
               dockerRegistryEndpoint: myacr #Service connection name?
               kubernetesServiceConnection: Dev-jbtest-aks-hello-1619683637064 #kubernetes Service connection Name
               namespace: hello
-
-        - deployment: Deploy_Dev
-          displayName: Deploy on Development
-          pool:
-            vmImage: $(VMIMAGE_NAME)
-          variables:
-            KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
-          environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - template: deploy.yaml@pipelines
+#          - task: KubernetesManifest@0
+#            inputs:
+#              action: 'deploy'
+#              kubernetesServiceConnection: 'Dev-jbtest-aks-hello-1619683637064'
+#              manifests: 'mm'
+#              imagePullSecrets: 'myacrsecret'
+##
+#        - deployment: Deploy_Dev
+#          displayName: Deploy on Development
+#          pool:
+#            vmImage: $(VMIMAGE_NAME)
+#          variables:
+#            KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
+#          environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
+#          strategy:
+#            runOnce:
+#              deploy:
+#                steps:
+#                  - template: deploy.yaml@pipelines
+        
+        
