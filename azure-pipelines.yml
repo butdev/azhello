@@ -43,9 +43,9 @@ stages:
           displayName: Deploy on Development
           pool:
             vmImage: $(VMIMAGE_NAME)
-          environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
           variables:
             KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
+          environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
           strategy:
             runOnce:
               deploy:
