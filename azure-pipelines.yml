@@ -18,7 +18,8 @@ variables:
     REGISTRY_URL: jbtestacr.azurecr.io
     APPLICATION_NAME: hello
     ENVIRONMENT_NAME: Dev
-    VMIMAGE_NAME: $(VMIMAGE_NAME)
+    VMIMAGE_NAME: ubuntu-latest
+    
 
 stages:
     - stage: Java_App_Build
