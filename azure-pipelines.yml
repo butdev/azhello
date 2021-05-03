@@ -39,10 +39,10 @@ stages:
               inputs:
                 containerRegistry: 'myacr'
                 repository: $(REGISTRY_URL)/$(IMAGE_NAME)
-                command: 'push'
                 tags: |
                   $(Build.BuildNumber)
                   latest
+                command: 'push'
 
     - stage: AKS_Deploy_Dev
       displayName: AKS Deploy on Development
