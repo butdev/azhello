@@ -51,12 +51,12 @@ stages:
               dockerRegistryEndpoint: myacr #Service connection name?
               kubernetesServiceConnection: Dev-jbtest-aks-hello-1619683637064 #kubernetes Service connection Name
               namespace: hello
-#          - task: KubernetesManifest@0
-#            inputs:
-#              action: 'deploy'
-#              kubernetesServiceConnection: 'Dev-jbtest-aks-hello-1619683637064'
-#              manifests: 'mm'
-#              imagePullSecrets: 'myacrsecret'
+          - task: KubernetesManifest@0
+            inputs:
+             action: 'deploy'
+             kubernetesServiceConnection: 'Dev-jbtest-aks-hello-1619683637064'
+             manifests: 'manifests/**'
+             imagePullSecrets: 'myacrsecret'
 ##
 #        - deployment: Deploy_Dev
 #          displayName: Deploy on Development
