@@ -35,15 +35,6 @@ stages:
             JDK_VERSION: '11'
           steps:
             - template: build.yaml@pipelines
-            - task: Docker@2
-              inputs:
-                containerRegistry: 'myacr'
-                #repository: $(REGISTRY_URL)/$(IMAGE_NAME)
-                repository: jbtestacr.azurecr.io/apps/hello
-                tags: |
-                  $(Build.BuildNumber)
-                  latest
-                command: 'push'
 
     - stage: AKS_Deploy_Dev
       displayName: AKS Deploy on Development
