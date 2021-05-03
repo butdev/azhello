@@ -35,6 +35,14 @@ stages:
             JDK_VERSION: '11'
           steps:
             - template: build.yaml@pipelines
+            - task: Docker@2
+              inputs:
+                containerRegistry: 'myacr'
+                repository: $(REGISTRY_URL)/$(IMAGE_NAME)
+                command: 'push'
+                tags: |
+                  $(Build.BuildNumber)
+                  latest
 
     - stage: AKS_Deploy_Dev
       displayName: AKS Deploy on Development
@@ -51,6 +59,8 @@ stages:
               dockerRegistryEndpoint: myacr #Service connection name?
               kubernetesServiceConnection: Dev-jbtest-aks-hello-1619683637064 #kubernetes Service connection Name
               namespace: hello
+
+
 #          - task: KubernetesManifest@0
 #            inputs:
 #             action: 'deploy'
