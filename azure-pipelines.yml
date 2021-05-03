@@ -38,7 +38,8 @@ stages:
             - task: Docker@2
               inputs:
                 containerRegistry: 'myacr'
-                repository: $(REGISTRY_URL)/$(IMAGE_NAME)
+                #repository: $(REGISTRY_URL)/$(IMAGE_NAME)
+                repository: jbtestacr.azurecr.io/apps/hello
                 tags: |
                   $(Build.BuildNumber)
                   latest
