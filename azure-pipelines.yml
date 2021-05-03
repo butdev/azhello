@@ -40,17 +40,6 @@ stages:
       displayName: AKS Deploy on Development
       dependsOn: Java_App_Build
       jobs:
-        - job: 
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Create secret
-            inputs:
-              action: createSecret
-              secretType: dockerregistry 
-              secretName: myacrsecret
-              dockerRegistryEndpoint: myacr 
-              kubernetesServiceConnection: Dev-jbtest-aks-hello-1619683637064
-
         - deployment: Deploy_Dev
           displayName: Deploy on Development
           pool:
