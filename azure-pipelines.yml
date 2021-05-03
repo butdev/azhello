@@ -51,24 +51,24 @@ stages:
               dockerRegistryEndpoint: myacr #Service connection name?
               kubernetesServiceConnection: Dev-jbtest-aks-hello-1619683637064 #kubernetes Service connection Name
               namespace: hello
-          - task: KubernetesManifest@0
-            inputs:
-             action: 'deploy'
-             kubernetesServiceConnection: 'Dev-jbtest-aks-hello-1619683637064'
-             manifests: 'manifests/**'
-             imagePullSecrets: 'myacrsecret'
+#          - task: KubernetesManifest@0
+#            inputs:
+#             action: 'deploy'
+#             kubernetesServiceConnection: 'Dev-jbtest-aks-hello-1619683637064'
+#             manifests: 'manifests/**'
+#             imagePullSecrets: 'myacrsecret'
 ##
-#        - deployment: Deploy_Dev
-#          displayName: Deploy on Development
-#          pool:
-#            vmImage: $(VMIMAGE_NAME)
-#          variables:
-#            KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
-#          environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
-#          strategy:
-#            runOnce:
-#              deploy:
-#                steps:
-#                  - template: deploy.yaml@pipelines
-        
+          - deployment: Deploy_Dev
+            displayName: Deploy on Development
+            pool:
+              vmImage: $(VMIMAGE_NAME)
+            envronment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
+            variables:
+              KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
+            strategy:
+              runOnce:
+                deploy:
+                  steps:
+                    - template: deploy.yaml@pipelines
+            
         
