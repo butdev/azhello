@@ -52,6 +52,14 @@ stages:
             runOnce:
               deploy:
                 steps:
+                  - task: KubernetesManifest@0
+                    displayName: Create secret
+                    inputs: 
+                      action: createSecret
+                      namespace: hello
+                      secretType: dockerRegistry
+                      secretName: myacr-secret
+                      dockerRegistryEndpoint: myacr
                   - template: deploy.yaml@pipelines
             
         
