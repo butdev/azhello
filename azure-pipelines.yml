@@ -28,7 +28,7 @@ stages:
         - job: build
           displayName: Maven build, docker build and tagging on git
           pool:
-            vmImage: ubuntu-latest
+            vmImage: $(VMIMAGE_NAME)
           variables:
             MAVEN_CACHE_FOLDER: $(System.DefaultWorkingDirectory)/.m2/repository
             MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
@@ -46,6 +46,7 @@ stages:
             vmImage: $(VMIMAGE_NAME)
           variables:
             KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
+            BUILD_BUILDNUMBER: $(Build.BuildNumber)
           environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
           strategy:
             runOnce:
