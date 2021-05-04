@@ -1,9 +1,8 @@
 ## Azure Pipelines example
+아래 2개의 Repository 참조하여 실행함
+- pipeline-template
+- kustomize-template
 
-### git command
-git init
-git add .
-git commit -m "init"
-
-git remote add origin https://jbtest-org@dev.azure.com/jbtest-org/test-project/_git/myhello
-git push -u origin --all
+## 사전 작업
+- AKR 생성
+- ACR 생성
