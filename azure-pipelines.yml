@@ -46,7 +46,6 @@ stages:
             vmImage: $(VMIMAGE_NAME)
           variables:
             KUSTOMIZATION_PATH: './$(APPLICATION_NAME)/dev'
-            BUILD_BUILDNUMBER: $(Build.BuildNumber)
           environment: $(ENVIRONMENT_NAME).$(APPLICATION_NAME)
           strategy:
             runOnce:
